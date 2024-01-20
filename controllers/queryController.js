@@ -5,7 +5,7 @@ const queryController = {
         try {
             const candidateID = request.userId
             const { category, preferedVoiceCommunication, QueryTitle, QueryDescription } = request.body
-            
+
             const newquery = new query({
                 category,
                 preferedVoiceCommunication,
@@ -14,10 +14,10 @@ const queryController = {
                 candidate: candidateID
             })
             newquery.save();
-            return response.status(200).json({message:"query created", newquery})
+            return response.status(200).json({ message: "query created", newquery })
         } catch (error) {
-            return response.status(500).json({message:"invalid"})
-            
+            return response.status(500).json({ message: "invalid" })
+
         }
     }
 }
