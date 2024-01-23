@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 const createQuerySchema = new mongoose.Schema({
     category: String,
-    preferedVoiceCommunication: String,
-    QueryTitle: String,
-    QueryDescription: String,
+    voicecommunication: String,
+    querytitle: String,
+    querydescription: String,
+    subcategory: String,
     from: {
         type: Date,
         default: Date.now

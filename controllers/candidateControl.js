@@ -63,9 +63,11 @@ const candidateController = {
 
             if (!candidate) {
                 return response.status(404).json({ message: "User not found" });
+            } else {
+                response.status(200).json({ message: "User retrieved", candidate });
             }
 
-            response.status(200).json({ message: "User retrieved", candidate });
+            
         } catch (error) {
             response.status(500).json({ message: "Error fetching the data", error: error.message });
         }
