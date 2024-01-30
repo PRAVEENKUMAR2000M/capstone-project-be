@@ -48,7 +48,7 @@ const candidateController = {
                 email: candidate.email,
             }, config.JWT_SECRET);
 
-            response.status(200).json({ message: "User signed in", token, email: candidate.email, name: candidate.name, id:candidate._id });
+            response.status(200).json({ message: "User signed in", token, email: candidate.email, name: candidate.name, id: candidate._id });
 
         } catch (error) {
             response.status(500).json({ message: "Error signing in", error: error.message });
@@ -67,7 +67,7 @@ const candidateController = {
                 response.status(200).json({ message: "User retrieved", candidate });
             }
 
-            
+
         } catch (error) {
             response.status(500).json({ message: "Error fetching the data", error: error.message });
         }
@@ -79,18 +79,18 @@ const candidateController = {
             // const candidate = await user.findByIdAndUpdate(id)
             const { name, email, password } = request.body
             if (!name && !email && !password) {
-                return response.status(500).json({message:"invalid user"})
+                return response.status(500).json({ message: "invalid user" })
             }
             const passwordHash = await bcrypt.hash(password, 10)
             const newCandidate = await user.findByIdAndUpdate(id, { name, email, password })
-            
+
             if (!newCandidate) {
-                return response.status(500).json({message:"error occurred"})
+                return response.status(500).json({ message: "error occurred" })
             } else {
-                return response.status(200).json({newCandidate})
+                return response.status(200).json({ newCandidate })
             }
         } catch (error) {
-            
+
         }
     },
 
@@ -99,9 +99,9 @@ const candidateController = {
             const id = request.params.id
             const candidate = await user.findByIdAndDelete(id)
             if (candidate) {
-                return response.status(200).json({message:"deleted successfully"})
+                return response.status(200).json({ message: "deleted successfully" })
             } else {
-                return response.status(404).json({message:"data fetching error"})
+                return response.status(404).json({ message: "data fetching error" })
             }
         } catch (error) {
             console.log(error)

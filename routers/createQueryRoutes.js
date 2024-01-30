@@ -6,5 +6,9 @@ const createQueryRoute = express.Router();
 
 createQueryRoute.post('/createQuery', authMiddleware.verifyToken, queryController.createQuery)
 createQueryRoute.get('/getQuery', authMiddleware.verifyToken, queryController.getQuery)
+createQueryRoute.get('/Queries', authMiddleware.verifyToken, queryController.getQueryid)
+
+createQueryRoute.delete('/deletequery/:queryId', authMiddleware.verifyToken, queryController.deleteQuery)
+
 
 module.exports = createQueryRoute
