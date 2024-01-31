@@ -65,6 +65,22 @@ const queryController = {
         }
     },
 
+    updateQuery: async (request, response) => {
+        try {
+            const queryId = request.params.queryId;
+            const updateQuery = await QueryModel.findByIdAndUpdate(queryId, request.body);
+
+            if (updateQuery) {
+                return response.status(200).json({ message: "Query updated", updateQuery });
+            } else {
+                return response.status(404).json({ message: "Query not found" });
+            }
+        } catch (error) {
+            console.error(error);
+            return response.status(500).json({ message: "Internal Server Error" });
+        }
+    }
+
 };
 
 module.exports = queryController;

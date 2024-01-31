@@ -15,7 +15,8 @@ const createQuerySchema = new mongoose.Schema({
         default: Date.now
     },
     cancel: String,
-    create: String
+    create: String,
+    status:String
 })
 
 module.exports = mongoose.model('query', createQuerySchema, 'createQuery');
