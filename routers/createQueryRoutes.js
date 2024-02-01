@@ -9,7 +9,7 @@ createQueryRoute.get('/getQuery', authMiddleware.verifyToken, queryController.ge
 createQueryRoute.get('/Queries', authMiddleware.verifyToken, queryController.getQueryid)
 
 createQueryRoute.delete('/deletequery/:queryId', authMiddleware.verifyToken, queryController.deleteQuery)
-createQueryRoute.put('/deletequery/:queryId', authMiddleware.verifyToken, queryController.updateQuery)
+createQueryRoute.put('/updatequery/:queryId', authMiddleware.verifyToken, queryController.updateQuery)
 
 
 

@@ -25,17 +25,15 @@ const queryController = {
 
     getQuery: async (request, response) => {
         try {
-            const candidateID = request.userId;
-            const candidateQueries = await QueryModel.find({ candidate: candidateID });
-
-            if (candidateQueries && candidateQueries.length > 0) {
-                return response.status(200).json({ message: "Data retrieved", candidateQueries });
+            const candidateID = request.userId
+            const candidateQueries = await QueryModel.find(candidateID)
+            if (!candidateQueries) {
+                return response.status(400).json({ message: "error fetching the data" })
             } else {
-                return response.status(400).json({ message: "No queries found for the candidate" });
+                response.status(200).json({ message: "data retrived", candidateQueries })
             }
         } catch (error) {
-            console.error(error);
-            response.status(500).json({ message: "Internal Server Error" });
+            console.log(error)
         }
     },
 
