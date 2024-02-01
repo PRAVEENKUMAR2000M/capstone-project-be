@@ -16,7 +16,12 @@ const createQuerySchema = new mongoose.Schema({
     },
     cancel: String,
     create: String,
-    status:String
+    status: String,
+    
+    candidate: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'candidate' // Assuming your user model is named 'candidate'
+    }
 })
 
 module.exports = mongoose.model('query', createQuerySchema, 'createQuery');

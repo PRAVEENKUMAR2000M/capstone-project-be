@@ -1,10 +1,13 @@
 const QueryModel = require('../model/createQuery');
+const jwt = require('jsonwebtoken');
+
 
 const queryController = {
     createQuery: async (request, response) => {
         try {
-            const candidateID = request.userId;
-            const { category, subcategory, voicecommunication, querytitle, querydescription } = request.body;
+            const candidateID = request.candidateId;
+            console.log(candidateID)
+            const { category, subcategory, voicecommunication, querytitle, querydescription, candidate } = request.body;
 
             const newQuery = new QueryModel({
                 category,
@@ -12,8 +15,9 @@ const queryController = {
                 voicecommunication,
                 querytitle,
                 querydescription,
-                candidate: candidateID,
+                candidate: candidateID
             });
+
 
             const savedQuery = await newQuery.save();
             return response.status(200).json({ message: "Query created", newQuery: savedQuery });
@@ -25,8 +29,11 @@ const queryController = {
 
     getQuery: async (request, response) => {
         try {
-            const candidateID = request.userId
-            const candidateQueries = await QueryModel.find(candidateID)
+            console.log('Request Object:', request);
+            const candidateID = request.candidateId
+            console.log(candidateID)
+            const candidateQueries = await QueryModel.find({ candidate: candidateID })
+
             if (!candidateQueries) {
                 return response.status(400).json({ message: "error fetching the data" })
             } else {
@@ -36,6 +43,7 @@ const queryController = {
             console.log(error)
         }
     },
+
 
     getQueryid: async (request, response) => {
         try {
